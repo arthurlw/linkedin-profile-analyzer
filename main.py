@@ -8,7 +8,6 @@ st.title("LinkedIn Profile Analyzer")
 # Input fields
 api_key = st.secrets["GROQ_API_KEY"]
 li_at_cookie = st.secrets["LI_AT_COOKIE"]
-linkedin = Linkedin(cookie=li_at_cookie)
 profile_url = st.text_input("Enter the LinkedIn Profile URL")
 
 # Initialize session state for caching responses
