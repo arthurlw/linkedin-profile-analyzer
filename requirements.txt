@@ -1,3 +1,4 @@
 streamlit
 linkedin-api
 groq
+linkedin-scraper
