@@ -7,21 +7,17 @@ st.title("LinkedIn Profile Analyzer with Groq AI")
 
 # Input fields
 api_key = st.secrets["GROQ_API_KEY"]
-linkedin_username = st.secrets["LINKEDIN_USERNAME"]
-linkedin_password = st.secrets["LINKEDIN_PASSWORD"]
+li_at_cookie = st.secrets["LI_AT_COOKIE"]
+linkedin = Linkedin(cookie=li_at_cookie)
 profile_url = st.text_input("Enter the LinkedIn Profile URL")
 
 # Initialize session state for caching responses
 if "cached_responses" not in st.session_state:
     st.session_state.cached_responses = {}
 
-def authenticate_linkedin(username, password):
+def authenticate_linkedin(cookie):
     """Authenticate with LinkedIn and return a session object."""
-    try:
-        return Linkedin(username, password)
-    except Exception as e:
-        st.error(f"LinkedIn authentication failed: {e}")
-        return None
+    return Linkedin(cookie=cookie)    
 
 def get_profile_data(linkedin, profile_url):
     """Retrieve profile data from LinkedIn."""
@@ -71,11 +67,12 @@ def display_analysis():
     st.write(st.session_state.cached_responses.get(analysis_type, "No analysis available yet."))
 
 # Main execution flow
-if api_key and linkedin_username and linkedin_password and profile_url:
-    linkedin = authenticate_linkedin(linkedin_username, linkedin_password)
+if api_key and li_at_cookie and profile_url:
+    linkedin = authenticate_linkedin(li_at_cookie)
     
     if linkedin:
         profile_data = get_profile_data(linkedin, profile_url)
+        st.write(profile_data)
         
         if profile_data:
             # Initialize Groq client
