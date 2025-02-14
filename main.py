@@ -3,7 +3,7 @@ from groq import Groq
 from linkedin_api import Linkedin  # Install linkedin-api-python if needed
 
 # Streamlit UI
-st.title("LinkedIn Profile Analyzer with Groq AI")
+st.title("LinkedIn Profile Analyzer")
 
 # Input fields
 api_key = st.secrets["GROQ_API_KEY"]
